@@ -9,7 +9,7 @@ TERRAFORM_SHA256SUM=84ccfb8e13b5fce63051294f787885b76a1fedef6bdbecf51c5e586c9e20
 TERRAFORM_WORK_DIR="/tmp/terraform-a2"
 # Github repository which contains the Apache2 plan
 TERRAFORM_APACHE2_REPO_URL="https://github.com/kevinhead/terraform-apache2"
-TERRAFORM_APACHE2_REPO_TAG="v0.1"
+TERRAFORM_APACHE2_REPO_TAG="v0.1.1"
 
 HTTPS_FOO_URL="https://foo.com"
 HTTPS_BAR_URL="https://bar.com"
@@ -89,6 +89,9 @@ do_work() {
     cd ${TERRAFORM_WORK_DIR}
     terraform init
     terraform apply -auto-approve
+
+    # add slight pause to allow service reloads to complete
+    sleep 5
 
     # confirm default repo sites
     a2_https_check ${HTTPS_FOO_URL}
